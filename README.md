@@ -1,144 +1,104 @@
 <h1 align="center">
-  <img alt="Fastfeet" title="Fastfeet" src=".github/logo.png" width="300px" />
+  <img alt="Fastfeet" title="Fastfeet" src="https://github.com/Rocketseat/bootcamp-gostack-desafio-02/raw/master/.github/logo.png" width="300px" />
 </h1>
 
 <h3 align="center">
-  Desafio 3: FastFeet, continuando a aplicação
+  Desafio 3: FastFeet, continuação
 </h3>
 
 <h3 align="center">
   :warning: Etapa 2/4 do Desafio Final :warning:
 </h3>
 
-<p>Esse desafio faz parte do Desafio Final, que é uma aplicação completa (Back-end, Front-end e Mobile) que é avaliada para emissão do Certificado do Bootcamp GoStack, por isso é fundamental que ele seja feito com muito empenho!</p>
-
-<blockquote align="center">“Faça seu melhor, mas sempre com prazo de entrega”!</blockquote>
+<blockquote align="center">“Faça o seu melhor, mas sempre com prazo de entrega”!</blockquote>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rocketseat/bootcamp-gostack-desafio-03?color=%2304D361">
+<a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#um-pouco-sobre-as-ferramentas">Ferramentas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#como-instalar-o-projeto-na-sua-máquina">Como Instalar </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#funcionalidades">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 
-  <a href="https://rocketseat.com.br">
-    <img alt="Made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%2304D361">
-  </a>
-
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
-
-  <a href="https://github.com/Rocketseat/bootcamp-gostack-desafio-03/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/rocketseat/bootcamp-gostack-desafio-03?style=social">
-  </a>
-</p>
-
-<p align="center">
-  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#entrega">Entrega</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#licença">Licença</a>
-</p>
 
 ## :rocket: Sobre o desafio
+Esse desafio é a segunda parte do Desafio Final que será uma aplicação completa (Back-end, Front-end e Mobile) de uma transportadora fictícia denominada FastFeet.
 
-Durante esse desafio vamos aprimorar a aplicação FastFeet que demos início no desafio anterior implementando funcionalidades que aprendemos durante as aulas até agora. 
+Nesse segundo desafio criei algumas funcionalidades mais avançadas que aprendi até aqui. Ao final da minha jornada terei uma aplicação completa envolvendo back-end, front-end e mobile, que será utilizada para a **certificação do bootcamp**.
 
-### **Funcionalidades do administrador**
+## **Um pouco sobre as ferramentas**
+Durante a resolução do desafio, utilizei as ferramentas :
 
-Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplicação para administradores.
+- NodeJS
+- Yarn
+- Express
+- Sucrase
+- Nodemon
+- ESLint
+- Prettier
+- EditorConfig
+- Yup (para validações)
+- Docker com imagem do Postgre (opcional)
+- Sequelize (PostgreSQL);
+- Multer (para upload de imagens)
+- NodeMailer (para envio de e-mails)
+- Redis (para gerenciar filas com Background Jobs)
+- Handlebars (para os Templates Engines dos e-mails)
+- Bee queue (para gerenciar filas os Background Jobs)
 
-### **1. Gestão de entregadores**
+## **Como instalar o projeto**
+1. Clone o repositório em sua máquina.
+2. Instale as dependecias do projeto :&nbsp;&nbsp;&nbsp; `yarn`&nbsp;  ou &nbsp; `npm install`
+3. Reenomeie o arquivo **.env.example** para **.env**
+4. Configure as variáveis de ambiente (arquivo .env) de acordo com seu ambiente local.
+5. Após finalizar as configurações, execute no seu terminal `yarn dev` ou `npm run dev`
 
-Permita que o administrador possa cadastrar entregadores para a plataforma, o entregador deve possuir os seguintes campos:
+## **Utilizando o Docker**
+1. Caso deseje utilizar o docker com a imagem do Postgre, execute no seu terminal `docker run --name fastfeet -e POSTGRESS_PASSWORD=<yourpasswordhere> -p 5432:5432 -d postgres`
 
-- id (id do entregador)
-- name (nome do entregador);
-- avatar_id (foto do entregador);
-- email (email do entregador)
-- created_at;
-- updated_at;
+## **Configurando o Banco e Dados**
+1. Dentro da pasta <code>./src/config</code>, edite o arquivo <strong>database.js</strong> inserindo as credenciais de acesso ao seu banco de dados
+2. Para criar as tabelas, no terminal execute: `yarn sequelize db:migrate`
+3. Para criar o usuário Administrador da Aplicação, no terminal execute: `yarn sequelize db:seed:all`
 
-Crie rotas para listagem/cadastro/atualização/remoção de entregadores;
+## **Utilizando o Docker com REDIS**
+1. Caso deseje utilizar o docker com a imagem do Redis, execute no seu terminal `docker run --name redisfastfeet -p 6379:6379 -d -t redis:alpine`
 
-Obs.: Essa funcionalidade é para administradores autenticados na aplicação.
+## **Funcionalidades**
 
-### **2. Gestão de encomendas**
+Abaixo estão descritas as funcionalidades adicionadas a aplicação.
 
-Apesar do entregador estar cadastrado, ele não é independente dentro da plataforma, e você deve cadastrar encomendas para os entregadores.
+### **1. Autenticação dos Administradores**
 
-Nessa funcionalidade criaremos um cadastro de encomendas por entregador, a encomenda possui os campos:
+Criei a permissão para que um usuário se autentique na aplicação utilizando e-mail e uma senha.
 
-- id (id da entrega)
-- recipient_id (referência ao destinatário);
-- deliveryman_id (referência ao entregador);
-- signature_id (referência à uma assinatura do destinatário, que será uma imagem);
-- product (nome do produto a ser entregue);
-- canceled_at (data de cancelamento, se cancelada);
-- start_date (data de retirada do produto);
-- end_date (data final da entrega);
-- created_at;
-- updated_at;
+- A autenticação foi feita utilizando JWT.
+- Realizei a validação dos dados de entrada com o Yup.
+- Administrador tem acesso a todas as rotas da aplicação.
+- Pode gerenciar todos os entregadores, destinatários e entregas.
 
-A **data de início** deve ser cadastrada assim que for feita a retirada do produto pelo entregador, e as retiradas só podem ser feitas entre as 08:00 e 18:00h.
+### **2. Gestão de destinatários**
 
-A **data de término** da entrega deve ser cadastrada quando o entregador finalizar a entrega:
+Criei a permissão para que os destinatários sejam mantidos na aplicação.
 
-Os campos **recipient_id** e **deliveryman_id** devem ser cadastrados no momento que for cadastrada a encomenda.
+- O gerenciamento de destinatários só pode ser feito por administradores autenticados na aplicação.
+- Realizei a validação dos dados de entrada com Yup.
+- O destinatário não pode se autenticar no sistema, ou seja, não possui uma senha de acesso.
 
-Quando a encomenda é **cadastrada** para um entregador, o entregador recebe um e-mail com detalhes da encomenda, com nome do produto e uma mensagem informando-o que o produto já está disponível para a retirada.
+### **3. Gestão de entregadores**
 
-Crie rotas para listagem/cadastro/atualização/remoção de encomendas;
+Criei um CRUD para que os entregadores sejam mantidos na aplicação.
 
-Obs.: Essa funcionalidade é para administradores autenticados na aplicação.
+- O gerenciamento de entregadores só pode ser feito por administradores autenticados na aplicação.
+- Realizei a validação dos dados de entrada
+- O entregador não pode se autenticar no sistema, ou seja, não possui senha.
+- O entregador pode visualizar as entregas vinculadas a ele.
+- O entregador pode iniciar uma entrega desde que esteja dentro do horário ( 08: as 18:00 ), e desde que não tenha atingido a cota de  5 ou entregas iniciadas no dia.
+- O entregador pode finalizar uma entrega, desde que envie uma foto de sua assinatura.
+- O entregador pode cadastrar um problema nas suas entregas.
 
-### **Funcionalidades do entregador**
+### **4. Gestão de encomendas**
 
-Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplicação para os entregadores.
+Criei um CRUD para que as encomendas sejam mantidas na aplicação.
 
-### **1. Visualizar encomendas**
-
-Para que o entregador possa visualizar suas encomendas, ele deverá informar apenas seu ID de cadastro (ID do entregador no banco de dados). Essa funcionalidade deve retornar as encomendas atribuidas a ele, que **não estejam entregues ou canceladas**;
-
-Permita também que ele liste apenas as encomendas que já foram **entregues** por ele, com base em seu ID de cadastro;
-
-Exemplo de requisição: `GET https://fastfeet.com/deliveryman/1/deliveries`
-
-### 2. Alterar status de encomendas
-
-Você deve permitir que o entregador tenha rotas para incluir uma data de retirada (start_date) e data de entrega (end_date) para as encomendas. O entregador só pode fazer **5 retiradas por dia**.
-
-Obs.: Para a funcionalidade de finalizar a entrega, você deverá permitir o envio de uma imagem que irá preencher o campo signature_id da tabela de encomendas.
-
-### 3. Cadastrar problemas nas entregas
-
-O entregador nem sempre conseguirá entregar as encomendas com sucesso, algumas vezes o destinatário pode estar ausente, ou o próprio entregador poderá ter algum problema com seu veículo na hora de entregar.
-
-A tabela `delivery_problems` deve conter os seguintes campos:
-
-- delivery_id (referência da encomenda);
-- description (descrição do problema que o entregador teve);
-- created_at;
-- updated_at;
-
-Crie uma rota para a distribuidora listar todas as entregas com algum problema;
-
-Crie uma rota para listar todos os problemas de uma encomenda baseado no ID da encomenda.
-
-Exemplo de requisição: `GET https://fastfeet.com/delivery/2/problems`
-
-Crie uma rota para o entregador cadastrar problemas na entrega apenas informando seu ID de cadastro (ID da encomenda no banco de dados);
-
-Exemplo de requisição: `POST https://fastfeet.com/delivery/3/problems`
-
-Crie uma rota para a distribuidora cancelar uma entrega baseado no ID do problema. Esse cancelamento pode acontecer devido a gravidade do problema da entrega, por exemplo, em caso de perda da encomenda.
-
-Exemplo de requisição: `DELETE https://fastfeet.com/problem/1/cancel-delivery`
-
-Quando uma encomenda for cancelada, o entregador deve receber um e-mail informando-o sobre o cancelamento.
-
-## **📅 Entrega**
-
-Esse desafio **não precisa ser entregue** e não receberá correção. Além disso, o código fonte **não está disponível** por fazer parte do **desafio final**, que será corrigido para **certificação** do bootcamp. Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
-
-## **📝 Licença**
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/Rocketseat/bootcamp-gostack-desafio-03/blob/master/LICENSE.md) para mais detalhes.
-
----
-
-Feito com ♥ by Rocketseat 👋 [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
+- O gerencimaneto de encomendas só pode ser feito por administradores autenticados na aplicação.
+- Realizei a validação dos dados de entrada.
+- A retirada de encomendas só pode ser feita entre 08:00 e 18:00 horas
