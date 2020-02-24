@@ -59,7 +59,7 @@ Durante a resolução do desafio, utilizei as ferramentas :
 2. Para criar as tabelas, no terminal execute: `yarn sequelize db:migrate`
 3. Para criar o usuário Administrador da Aplicação, no terminal execute: `yarn sequelize db:seed:all`
 
-## **Utilizando o Docker com REDIS**
+## **Utilizando o Docker com Redis**
 1. Caso deseje utilizar o docker com a imagem do Redis, execute no seu terminal `docker run --name redisfastfeet -p 6379:6379 -d -t redis:alpine`
 
 ## **Funcionalidades**
